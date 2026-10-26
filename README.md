@@ -6,7 +6,7 @@
 
 ## 快速开始
 
-需要 Python 3.10 或更高版本和 uv。依赖通过 `uv sync` 安装；模型从 [Qwen 官方 Hugging Face 仓库](https://huggingface.co/Qwen/Qwen3.5-4B) 下载，包含权重、配置、tokenizer 和聊天模板。
+需要 Python 3.10 或更高版本和 uv。依赖通过 `uv sync` 安装；模型默认通过国内镜像 `https://hf-mirror.com` 下载 Qwen 官方仓库 `Qwen/Qwen3.5-4B` 的完整快照，包含权重、配置、tokenizer 和聊天模板。镜像下载使用普通 HTTP 传输，禁用 Xet 加速。
 
 ```powershell
 git clone https://github.com/Seagull-W/Qwen-NeuronSteering.git
@@ -17,6 +17,12 @@ uv run python -m examples.local_generation --model "models/Qwen3.5-4B" --prompt 
 ```
 
 下载需要网络与足够磁盘空间。重复执行下载命令会复用已有文件；中断后可重新运行。通过 `--output` 指定其他目录，生成时的 `--model` 应指向同一目录；通过 `--revision` 指定提交哈希可固定模型版本。`models/` 已加入 Git 忽略规则。下载完成后，生成阶段仅从本地读取文件。
+
+可以通过 `--endpoint` 更换下载地址，例如切回官方源：
+
+```powershell
+uv run python -m examples.download_model --endpoint https://huggingface.co
+```
 
 如果默认缓存目录不可写，可在运行命令前设置：
 
