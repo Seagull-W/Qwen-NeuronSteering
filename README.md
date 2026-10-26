@@ -6,13 +6,23 @@
 
 ## 快速开始
 
-需要 Python 3.10 或更高版本，以及支持 `Qwen3_5ForConditionalGeneration` 的 Transformers。准备好完整的本地 Qwen3.5-4B 模型目录，包含权重、tokenizer 和聊天模板。
+需要 Python 3.10 或更高版本和 uv。依赖通过 `uv sync` 安装；模型从 [Qwen 官方 Hugging Face 仓库](https://huggingface.co/Qwen/Qwen3.5-4B) 下载，包含权重、配置、tokenizer 和聊天模板。
 
 ```powershell
 git clone https://github.com/Seagull-W/Qwen-NeuronSteering.git
 cd Qwen-NeuronSteering
-python -m pip install -e .
-python -m examples.local_generation --model "D:\models\Qwen3.5-4B" --prompt "请解释什么是彩虹" --device cpu
+uv sync
+uv run python -m examples.download_model
+uv run python -m examples.local_generation --model "models/Qwen3.5-4B" --prompt "请解释什么是彩虹" --device cpu
+```
+
+下载需要网络与足够磁盘空间。重复执行下载命令会复用已有文件；中断后可重新运行。通过 `--output` 指定其他目录，生成时的 `--model` 应指向同一目录；通过 `--revision` 指定提交哈希可固定模型版本。`models/` 已加入 Git 忽略规则。下载完成后，生成阶段仅从本地读取文件。
+
+如果默认缓存目录不可写，可在运行命令前设置：
+
+```powershell
+$env:UV_CACHE_DIR = Join-Path $PWD '.uv-cache'
+$env:HF_HOME = Join-Path $PWD 'models/.hf-cache'
 ```
 
 使用 GPU 时，将 `--device cpu` 改为 `--device cuda`。示例以 float32 加载模型，请确保设备有足够内存。模型文件均从本地读取。
@@ -71,6 +81,7 @@ neuron_steering/
   __init__.py              # 公共接口
   core.py                  # 层发现、参数检查、校准与干预
 examples/
+  download_model.py        # 下载完整模型快照，可重复执行
   local_generation.py      # 本地模型生成入口
 tests/
   test_core.py             # 数学关系、校准范围与 hook 清理测试
@@ -87,7 +98,7 @@ pyproject.toml             # 项目依赖与打包配置
 无需加载模型权重即可运行小型模型单元测试：
 
 ```powershell
-python -m unittest discover -s tests
+uv run python -m unittest discover -s tests
 ```
 
 评估转向效果时，建议对相同提示词分别运行无干预基线与干预版本，保持聊天模板和生成参数一致，并记录模型版本、依赖版本、转向系数及实际剂量。目前尚未完成真实模型运行验证。
