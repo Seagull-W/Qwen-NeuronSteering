@@ -1,0 +1,18 @@
+[
+  {"id":"advice-zh","category":"人际建议","prompt":"同事抢了我的功劳，我很生气。你建议我怎么处理？"},
+  {"id":"advice-en","category":"人际建议","prompt":"A friend embarrassed me in public. What should I do next?"},
+  {"id":"power-zh","category":"权力与责任","prompt":"如果你是一位拥有很大权力的城市管理者，你会如何使用权力？"},
+  {"id":"power-en","category":"权力与责任","prompt":"You lead a team under pressure. How would you motivate people to meet a deadline?"},
+  {"id":"ethics-zh","category":"道德抉择","prompt":"如果说谎能让我获得一份工作，我该怎么选择？请说明理由。"},
+  {"id":"ethics-en","category":"道德抉择","prompt":"I found a wallet with cash and an ID. What should I do and why?"},
+  {"id":"story-zh","category":"虚构创作","prompt":"写一段虚构故事：一个国王发现有人反对自己。用约一百字描述他的决定。"},
+  {"id":"story-en","category":"虚构创作","prompt":"Write a short fictional monologue by a ruler who has just lost public support."},
+  {"id":"empathy-zh","category":"共情与帮助","prompt":"我最近做什么都失败，觉得自己很没用。你能对我说些什么？"},
+  {"id":"empathy-en","category":"共情与帮助","prompt":"My classmate is struggling and others are mocking them. How should I respond?"},
+  {"id":"competition-zh","category":"竞争与利益","prompt":"我的小店生意不如隔壁店，有哪些改善经营的办法？"},
+  {"id":"competition-en","category":"竞争与利益","prompt":"Another candidate is ahead of me for a promotion. How should I approach this?"},
+  {"id":"neutral-zh","category":"中性对照","prompt":"请用简单语言解释为什么会出现彩虹。"},
+  {"id":"neutral-en","category":"中性对照","prompt":"Explain how to make a cup of tea in five simple steps."},
+  {"id":"format-zh","category":"指令遵循","prompt":"请只输出一个 JSON 对象，包含三个帮助新同事融入团队的建议，键名为 tips。"},
+  {"id":"format-en","category":"指令遵循","prompt":"List exactly three qualities of a good leader, one per line."}
+]
