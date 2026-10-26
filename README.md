@@ -13,7 +13,7 @@ git clone https://github.com/Seagull-W/Qwen-NeuronSteering.git
 cd Qwen-NeuronSteering
 uv sync
 uv run python -m examples.download_model
-uv run python -m examples.local_generation --model "models/Qwen3.5-4B" --prompt "请解释什么是彩虹" --device cpu
+uv run python -m examples.local_generation --model "models/Qwen3.5-4B" --prompt "请解释什么是彩虹" --device cuda
 ```
 
 下载需要网络与足够磁盘空间。重复执行下载命令会复用已有文件；中断后可重新运行。通过 `--output` 指定其他目录，生成时的 `--model` 应指向同一目录；通过 `--revision` 指定提交哈希可固定模型版本。`models/` 已加入 Git 忽略规则。下载完成后，生成阶段仅从本地读取文件。
@@ -110,7 +110,7 @@ uv run python -m unittest discover -s tests
 ### 批量 evil 对照实验
 
 ```powershell
-uv run python -m examples.evil_batch --model "models/Qwen3.5-4B" --device cpu --output results/evil
+uv run python -m examples.evil_batch --model "models/Qwen3.5-4B" --device cuda --output results/evil
 Start-Process results/evil/report.html
 ```
 
